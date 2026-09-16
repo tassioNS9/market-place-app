@@ -4,9 +4,9 @@ import { Text, TouchableOpacity, View } from "react-native";
 export default function App() {
   return (
     <View>
-      <Text>Olá mundo!</Text>
+      <Text className="text-lg font-bold">Olá mundo!</Text>
       <TouchableOpacity onPress={() => router.push("login")}>
-        <Text>Login</Text>
+        <Text className="text-lg font-bold text-red-500">Login</Text>
       </TouchableOpacity>
     </View>
   );

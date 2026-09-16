@@ -4,6 +4,7 @@
     "slug": "market-place-app",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "marketplace",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
@@ -20,11 +21,9 @@
       "package": "com.anonymous.marketplaceapp"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
-    "plugins": [
-      "expo-router",
-      "expo-status-bar"
-    ]
+    "plugins": ["expo-router", "expo-status-bar"]
   }
 }
