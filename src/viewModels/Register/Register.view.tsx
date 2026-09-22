@@ -7,8 +7,13 @@ export const RegisterView: FC<ReturnType<typeof useRegisterViewModel>> = ({
   onSubmit,
 }) => {
   return (
-    <View className="flex-1 items-center justify-center">
-      <AppInput />
+    <View className="flex-1 justify-center">
+      <AppInput
+        leftIcon="mail-outline"
+        label="E-mail"
+        error="E-mail inválido"
+      />
+      <AppInput leftIcon="lock-closed-outline" label="Senha" secureTextEntry />
       <TouchableOpacity onPress={onSubmit}>
         <Text>Registrar</Text>
       </TouchableOpacity>
