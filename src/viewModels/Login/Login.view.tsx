@@ -8,6 +8,7 @@ import { useLoginViewModel } from "./useLogin.viewModel";
 
 export const LoginView: FC<ReturnType<typeof useLoginViewModel>> = ({
   control,
+  onSubmit,
 }) => {
   return (
     <KeyboardContainer>
@@ -33,6 +34,9 @@ export const LoginView: FC<ReturnType<typeof useLoginViewModel>> = ({
           placeholder="Sua senha"
           secureTextEntry
         />
+        <TouchableOpacity onPress={onSubmit}>
+          <Text>Fazer Login</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.push("/register")}>
           <Text>Registro</Text>
