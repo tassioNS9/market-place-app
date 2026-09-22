@@ -59,6 +59,8 @@ export const AppInput: FC<AppInputProps> = ({
   });
   const styles = appInputVariants({
     isFocused,
+    isDisabled,
+    isError: !!error,
   });
 
   return (
