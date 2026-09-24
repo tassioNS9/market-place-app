@@ -7,8 +7,10 @@
     "scheme": "marketplace",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "newArchitecture": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.marketplaceapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,12 +20,29 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.marketplaceapp"
+      "package": "com.anonymous.marketplaceapp",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-status-bar"]
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Este app precisa acessar sua galeria de fotos para que você possa selecionar e enviar sua foto de perfil.",
+          "cameraPermission": "Este app precisa acessar sua câmera para que você possa tirar fotos para o seu perfil."
+        }
+      ]
+    ]
   }
 }
