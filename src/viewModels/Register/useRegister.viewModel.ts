@@ -3,40 +3,24 @@ import { useForm } from "react-hook-form";
 import { useRegisterMutation } from "../../shared/queries/auth/use-register.mutation";
 import { RegisterFormData, registerScheme } from "./register.scheme";
 import { useUserStore } from "@/shared/store/user-store";
-import { useAppModal } from "@/shared/hooks/useAppModal";
-import { useCamera } from "@/shared/hooks/useCamera";
-import { useGallery } from "@/shared/hooks/useGallery";
+import { useImage } from "@/shared/hooks/useImage";
+import { Alert } from "react-native";
+import { useState } from "react";
+import { CameraType } from "expo-image-picker";
 
 export const useRegisterViewModel = () => {
   const userRegisterMutation = useRegisterMutation();
   const { setSession, user } = useUserStore();
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
 
-  const modals = useAppModal();
-  const { openCamera } = useCamera({});
-  const { openGallery } = useGallery({});
+  const { handleSelectImage } = useImage({
+    callback: setAvatarUri,
+    // Para abrir a camera frontal, você pode definir a propriedade cameraType como CameraType.front
+    cameraType: CameraType.front,
+  });
 
-  const handleSelectAvatar = () => {
-    modals.showSelection({
-      title: "Selecionar foto",
-      message: "Escolha uma opção:",
-      options: [
-        {
-          text: "Galeria",
-          icon: "images",
-          variant: "primary",
-          onPress: async () => {
-            const imageUri = await openGallery();
-            console.log(imageUri, "imageUri");
-          },
-        },
-        {
-          text: "Câmera",
-          icon: "camera",
-          variant: "primary",
-          onPress: openCamera,
-        },
-      ],
-    });
+  const handleSelectAvatar = async () => {
+    await handleSelectImage();
   };
 
   const {
@@ -74,5 +58,6 @@ export const useRegisterViewModel = () => {
     errors,
     onSubmit,
     handleSelectAvatar,
+    avatarUri,
   };
 };
