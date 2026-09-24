@@ -3,10 +3,34 @@ import { useForm } from "react-hook-form";
 import { useRegisterMutation } from "../../shared/queries/auth/use-register.mutation";
 import { RegisterFormData, registerScheme } from "./register.scheme";
 import { useUserStore } from "@/shared/store/user-store";
+import { useAppModal } from "@/shared/hooks/useAppModal";
 
 export const useRegisterViewModel = () => {
   const userRegisterMutation = useRegisterMutation();
   const { setSession, user } = useUserStore();
+
+  const modals = useAppModal();
+
+  const handleSelectAvatar = () => {
+    modals.showSelection({
+      title: "Selecionar foto",
+      message: "Escolha uma opção:",
+      options: [
+        {
+          text: "Galeria",
+          icon: "images",
+          variant: "primary",
+          onPress: () => alert("Galeria"),
+        },
+        {
+          text: "Câmera",
+          icon: "camera",
+          variant: "primary",
+          onPress: () => alert("Câmera"),
+        },
+      ],
+    });
+  };
 
   const {
     control,
@@ -42,5 +66,6 @@ export const useRegisterViewModel = () => {
     control,
     errors,
     onSubmit,
+    handleSelectAvatar,
   };
 };

@@ -6,10 +6,12 @@ import { AuthFormHeader } from "@/shared/components/AuthFormHeader";
 import { useRegisterViewModel } from "./useRegister.viewModel";
 import { KeyboardContainer } from "@/shared/components/KeyboardContainer";
 import { AppButton } from "@/shared/components/AppButton";
+import { Ionicons } from "@expo/vector-icons";
 
 export const RegisterView: FC<ReturnType<typeof useRegisterViewModel>> = ({
   onSubmit,
   control,
+  handleSelectAvatar,
 }) => {
   return (
     <KeyboardContainer>
@@ -18,6 +20,9 @@ export const RegisterView: FC<ReturnType<typeof useRegisterViewModel>> = ({
           title="Crie sua conta"
           subTitle="Informe seus dados pessoais e de acesso"
         />
+        <TouchableOpacity onPress={handleSelectAvatar}>
+          <Ionicons name="cloud-upload-outline" size={32} />
+        </TouchableOpacity>
         <AppInputController
           leftIcon="person-outline"
           label="NOME"
