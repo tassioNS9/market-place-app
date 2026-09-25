@@ -7,5 +7,5 @@ export default function App() {
     return <Redirect href="/(private)/home" />;
   }
 
-  return <Redirect href="/login" />;
+  return <Redirect href="/(public)/login" />;
 }
