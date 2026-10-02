@@ -3,7 +3,7 @@ import { ProductResponse } from "../interfaces/http/product-response";
 import { ProductRequest } from "../interfaces/http/product-request";
 
 export const getProducts = async (params: ProductRequest) => {
-  const { data } = await marketPlaceApiClient.get<ProductResponse>(
+  const { data } = await marketPlaceApiClient.post<ProductResponse>(
     "/products",
     { params },
   );
