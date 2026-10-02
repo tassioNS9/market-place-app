@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getProducts } from "../../../services/product.service";
+import { getProducts } from "../../services/product.service";
+import { buildImageUrl } from "@/shared/helpers/buildImageUrl";
 
 export const useProductInfiniteQuery = () => {
   const {
@@ -20,9 +21,10 @@ export const useProductInfiniteQuery = () => {
             perPage: 10,
           },
         });
-
+        console.log("Fetched products:", response);
         return response;
       } catch (error) {
+        console.log("Error fetching products:", error);
         throw error;
       }
     },
@@ -34,8 +36,18 @@ export const useProductInfiniteQuery = () => {
     initialPageParam: 1,
     queryKey: ["products"],
   });
+  console.log("Data from useInfiniteQuery:", data);
+  console.log("Error from useInfiniteQuery:", error);
+
+  const products = data?.pages
+    .flatMap((page) => page.data)
+    .map((product) => ({
+      ...product,
+      imageUrl: buildImageUrl(product.photo),
+    }));
 
   return {
+    products,
     data,
     error,
     fetchNextPage,
