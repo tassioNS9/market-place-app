@@ -39,7 +39,6 @@ export const useRegisterViewModel = () => {
   });
 
   const onSubmit = handleSubmit(async (userData) => {
-    console.log(userData);
     const { confirmPassword, ...registerData } = userData;
 
     const responseMutation =
@@ -50,8 +49,6 @@ export const useRegisterViewModel = () => {
       user: responseMutation.user,
     });
   });
-
-  console.log(user, "user");
 
   return {
     control,
