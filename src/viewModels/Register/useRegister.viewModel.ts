@@ -4,7 +4,6 @@ import { useRegisterMutation } from "../../shared/queries/auth/use-register.muta
 import { RegisterFormData, registerScheme } from "./register.scheme";
 import { useUserStore } from "@/shared/store/user-store";
 import { useImage } from "@/shared/hooks/useImage";
-import { Alert } from "react-native";
 import { useState } from "react";
 import { CameraType } from "expo-image-picker";
 
