@@ -1,12 +1,16 @@
-import { Text, View } from "react-native";
-import { useUserStore } from "@/shared/store/user-store";
+import { FlatList, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { HomeHeader } from "./components/Header";
 
 export const HomeView = () => {
-  const { user } = useUserStore();
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="text-lg font-bold">Bem-vindo, {user?.name}</Text>
-      <Text className="text-base text-gray-600">{user?.email}</Text>
-    </View>
+    <SafeAreaView edges={["top"]} className="flex-1">
+      <FlatList
+        data={[]}
+        renderItem={() => <></>}
+        ListHeaderComponent={<HomeHeader />}
+        contentContainerClassName="px-4 pb-[120px]"
+      />
+    </SafeAreaView>
   );
 };
