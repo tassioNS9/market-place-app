@@ -4,7 +4,8 @@ import { useUserStore } from "@/shared/store/user-store";
 import { colors } from "@/styles/colors";
 
 export const HomeHeader = () => {
-  const { user } = useUserStore();
+  const { user, logout } = useUserStore();
+  console.log("User data in HomeHeader:", user);
 
   return (
     <View>
@@ -26,6 +27,12 @@ export const HomeHeader = () => {
           <Text className="font-bold text-base">
             Olá, {user?.name.split(" ")[0] || "Usuário"}
           </Text>
+          <TouchableOpacity
+            onPress={logout}
+            className="text-center text-blue-light"
+          >
+            <Text className="color-purple-base font-bold">Sair</Text>
+          </TouchableOpacity>
           <View className="flex-row items-center gap-2">
             <Text className="color-purple-base font-bold">Ver perfil</Text>
             <Ionicons
