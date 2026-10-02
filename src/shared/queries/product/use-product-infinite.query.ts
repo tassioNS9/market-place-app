@@ -21,10 +21,8 @@ export const useProductInfiniteQuery = () => {
             perPage: 10,
           },
         });
-        console.log("Fetched products:", response);
         return response;
       } catch (error) {
-        console.log("Error fetching products:", error);
         throw error;
       }
     },
@@ -36,8 +34,6 @@ export const useProductInfiniteQuery = () => {
     initialPageParam: 1,
     queryKey: ["products"],
   });
-  console.log("Data from useInfiniteQuery:", data);
-  console.log("Error from useInfiniteQuery:", error);
 
   const products = data?.pages
     .flatMap((page) => page.data)
