@@ -6,7 +6,7 @@ import { useUserStore } from "../store/user-store";
 const getBaseURL = () => {
   return Platform.select({
     ios: "http://localhost:3001",
-    android: "http://10.0.2.2:3001",
+    android: "http://localhost:3001",
   });
 };
 
