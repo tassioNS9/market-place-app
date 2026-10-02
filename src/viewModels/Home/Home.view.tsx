@@ -9,6 +9,7 @@ import { FC } from "react";
 
 export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
   products,
+  handleEndReached,
 }) => {
   const productsList: ProductInterface[] = [
     {
@@ -37,6 +38,7 @@ export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={({ id }) => `product-list-item-${id}`}
         numColumns={2}
+        onEndReached={handleEndReached}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         ListHeaderComponent={
           <>
