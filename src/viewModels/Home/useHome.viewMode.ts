@@ -27,7 +27,6 @@ export const useHomeViewModel = () => {
     handleLoadMore();
   };
 
-  console.log("Products:", data);
   console.log("Data:", JSON.stringify(products, null, 2));
   console.log("Error:", error);
   console.log("Is Loading:", isLoading);
@@ -36,5 +35,8 @@ export const useHomeViewModel = () => {
     handleRefresh,
     handleEndReached,
     products,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
   };
 };

@@ -5,11 +5,15 @@ import { SearchInput } from "./components/SearchInput";
 import { ProductCard } from "./components/ProductCard";
 import { ProductInterface } from "@/shared/interfaces/product";
 import { useHomeViewModel } from "./useHome.viewMode";
+import { Footer } from "./components/Footer";
 import { FC } from "react";
 
 export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
   products,
   handleEndReached,
+  isLoading,
+  hasNextPage,
+  isFetchingNextPage,
 }) => {
   const productsList: ProductInterface[] = [
     {
@@ -38,6 +42,11 @@ export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
         renderItem={({ item }) => <ProductCard product={item} />}
         keyExtractor={({ id }) => `product-list-item-${id}`}
         numColumns={2}
+        ListFooterComponent={() => (
+          <Footer
+            isLoading={hasNextPage && Boolean(isLoading || isFetchingNextPage)}
+          />
+        )}
         onEndReached={handleEndReached}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         ListHeaderComponent={
