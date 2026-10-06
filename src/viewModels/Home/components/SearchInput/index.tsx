@@ -3,6 +3,8 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { AppInput } from "@/shared/components/AppInput";
 import { colors } from "@/styles/colors";
 import { useBottomSheetStore } from "@/shared/store/bottomsheet-store";
+import { Filter } from "../Filter";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const SearchInput = () => {
   const { open } = useBottomSheetStore();
@@ -21,12 +23,11 @@ export const SearchInput = () => {
 
         <TouchableOpacity
           onPress={() => {
-            console.log("open bottom sheet");
             open({
               content: (
-                <View className="h-20">
-                  <Text>Teste</Text>
-                </View>
+                <SafeAreaView>
+                  <Filter />
+                </SafeAreaView>
               ),
             });
           }}
