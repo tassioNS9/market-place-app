@@ -21,8 +21,13 @@ export const SearchInput = () => {
 
         <TouchableOpacity
           onPress={() => {
+            console.log("open bottom sheet");
             open({
-              content: <Text>Teste</Text>,
+              content: (
+                <View className="h-20">
+                  <Text>Teste</Text>
+                </View>
+              ),
             });
           }}
           className="ml-5 mt-6 items-center justify-center rounded-lg border size-[48px] border-purple-base"

@@ -19,9 +19,7 @@ export const AppBottomSheet = () => {
 
   useEffect(() => {
     if (isOpen && content) {
-      requestAnimationFrame(() => {
-        bottomSheetRef.current?.snapToIndex(0);
-      });
+      bottomSheetRef.current?.snapToIndex(0);
     } else {
       bottomSheetRef.current?.close();
     }
