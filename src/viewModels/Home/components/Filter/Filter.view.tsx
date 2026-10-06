@@ -15,9 +15,11 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
   handleValueMinChange,
   handleCategoryToggle,
   selectedCategories,
+  handleApllyFilters,
+  handleClearFilters,
 }) => {
   const { close } = useBottomSheetStore();
-  console.log(productCategories);
+
   return (
     <View>
       <View className="flex-row items-center justify-between py-4 px-6">
@@ -58,6 +60,7 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
           <View className="mb-3 gap-2 grid grid-cols-2">
             {productCategories?.map(({ name, id }) => (
               <TouchableOpacity
+                onPress={() => handleCategoryToggle(id)}
                 className="flex-row items-center py-2"
                 key={`product-category-${id}`}
               >
@@ -75,10 +78,12 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
 
         <View className="flex-row gap-3 mt-4 mb-6">
           <View className="flex-1">
-            <AppButton variant="outlined">Limpar filtro</AppButton>
+            <AppButton onPress={handleClearFilters} variant="outlined">
+              Limpar filtro
+            </AppButton>
           </View>
           <View className="flex-1">
-            <AppButton>Filtrar</AppButton>
+            <AppButton onPress={handleApllyFilters}>Filtrar</AppButton>
           </View>
         </View>
       </View>

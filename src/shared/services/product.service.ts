@@ -6,7 +6,7 @@ import { ProductCategory } from "../interfaces/product";
 export const getProducts = async (params: ProductRequest) => {
   const { data } = await marketPlaceApiClient.post<ProductResponse>(
     "/products",
-    { params },
+    params,
   );
   return data;
 };
