@@ -45,7 +45,7 @@ export const useProductInfiniteQuery = ({
         : undefined;
     },
     initialPageParam: 1,
-    queryKey: ["products"],
+    queryKey: ["products", filters],
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
