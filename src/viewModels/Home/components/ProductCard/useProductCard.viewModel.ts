@@ -7,5 +7,6 @@ interface UseProductCardViewModelParams {
 export const useProductCardViewModel = ({
   product,
 }: UseProductCardViewModelParams) => {
-  return { product };
+  const formatRating = product.averageRating.toFixed(1).replace(".", ",");
+  return { product, formatRating };
 };
