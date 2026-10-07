@@ -5,8 +5,17 @@ import { colors } from "@/styles/colors";
 import { useBottomSheetStore } from "@/shared/store/bottomsheet-store";
 import { Filter } from "../Filter";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { FC } from "react";
 
-export const SearchInput = () => {
+interface SearchInputParams {
+  setSearchInputText: (text: string) => void;
+  inputValue: string;
+}
+
+export const SearchInput: FC<SearchInputParams> = ({
+  setSearchInputText,
+  inputValue,
+}) => {
   const { open } = useBottomSheetStore();
 
   return (
@@ -15,6 +24,8 @@ export const SearchInput = () => {
       <View className="flex-row">
         <View className="flex-1">
           <AppInput
+            value={inputValue}
+            onChangeText={setSearchInputText}
             leftIcon="search"
             returnKeyType="search"
             className="text-lg flex-1"

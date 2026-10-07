@@ -1,8 +1,12 @@
 import { useProductInfiniteQuery } from "@/shared/queries/product/use-product-infinite.query";
 import { useFilterStore } from "@/shared/store/use-filter-store";
+import { useState } from "react";
+import { useDebounce } from "@/shared/hooks/useDebounce";
 
 export const useHomeViewModel = () => {
   const { appliedFilterState } = useFilterStore();
+  const [searchInputText, setSearchInputText] = useState("");
+  const currentSearchText = useDebounce(searchInputText);
 
   const {
     products,
@@ -14,13 +18,17 @@ export const useHomeViewModel = () => {
     isLoading,
     refetch,
     isRefetching,
-  } = useProductInfiniteQuery({ filters: appliedFilterState });
+  } = useProductInfiniteQuery({
+    filters: { ...appliedFilterState, searchText: currentSearchText },
+  });
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage && !isLoading) {
       fetchNextPage();
     }
   };
+
+  console.log(appliedFilterState, "appliedFilters");
 
   const handleRefresh = async () => {
     await refetch();
@@ -30,7 +38,6 @@ export const useHomeViewModel = () => {
     handleLoadMore();
   };
 
-  console.log("Data:", JSON.stringify(products, null, 2));
   console.log("Error:", error);
   console.log("Is Loading:", isLoading);
   return {
@@ -41,5 +48,9 @@ export const useHomeViewModel = () => {
     isLoading,
     hasNextPage,
     isFetchingNextPage,
+    refetch,
+    isRefetching,
+    setSearchInputText,
+    searchInputText,
   };
 };

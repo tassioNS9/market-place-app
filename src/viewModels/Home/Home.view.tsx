@@ -1,12 +1,11 @@
-import { FlatList } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { HomeHeader } from "./components/Header";
-import { SearchInput } from "./components/SearchInput";
 import { ProductCard } from "./components/ProductCard";
-import { ProductInterface } from "@/shared/interfaces/product";
 import { useHomeViewModel } from "./useHome.viewMode";
 import { Footer } from "./components/Footer";
+import { colors } from "@/styles/colors";
 import { FC } from "react";
+import { RenderHeader } from "./components/RenderHeader";
 
 export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
   products,
@@ -14,27 +13,11 @@ export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
   isLoading,
   hasNextPage,
   isFetchingNextPage,
+  handleRefresh,
+  isRefetching,
+  setSearchInputText,
+  searchInputText,
 }) => {
-  const productsList: ProductInterface[] = [
-    {
-      id: 1,
-      value: "100",
-      name: "Product 1",
-      description: "Description 1",
-      photo: "https://picsum.photos/seed/3/600",
-      height: "100",
-      width: "100",
-      weight: "100",
-      averageRating: 1,
-      views: 1,
-      ratingCount: 1,
-      categoryId: 1,
-      category: { id: 1, name: "Category 1" },
-      createdAt: "2021-01-01",
-      updatedAt: "2021-01-01",
-      deletedAt: "2021-01-01",
-    },
-  ];
   return (
     <SafeAreaView edges={["top"]} className="flex-1">
       <FlatList
@@ -50,12 +33,20 @@ export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
         onEndReached={handleEndReached}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         ListHeaderComponent={
-          <>
-            <HomeHeader />
-            <SearchInput />
-          </>
+          <RenderHeader
+            searchInputText={searchInputText}
+            setSearchInputText={setSearchInputText}
+          />
         }
         contentContainerClassName="px-4 pb-[120px]"
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            colors={[colors["purple-base"]]}
+            tintColor={colors["purple-base"]}
+            onRefresh={handleRefresh}
+          />
+        }
       />
     </SafeAreaView>
   );
