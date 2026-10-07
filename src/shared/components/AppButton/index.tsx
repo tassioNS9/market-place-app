@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from "react-native";
-import { colors } from "../../../styles/colors";
+import { colors } from "@/styles/colors";
 import { ButtonVariants, buttonVariants } from "./button.variants";
 
 interface AppButtonProps extends TouchableOpacityProps, ButtonVariants {
