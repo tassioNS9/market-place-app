@@ -12,9 +12,6 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
   if (error) {
     return <Text>Houve um erro ao carregar os detalhes do produto</Text>;
   }
-  if (isLoading) {
-    return <Text>Carregando...</Text>;
-  }
 
   if (!productDetails) {
     return null;
@@ -24,12 +21,8 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
     <SafeAreaView>
       <FlatList
         data={[]}
-        renderItem={() => <Header productDetails={productDetails} />}
-        ListHeaderComponent={() => (
-          <>
-            <Text>{productDetails?.name}</Text>
-          </>
-        )}
+        renderItem={() => <></>}
+        ListHeaderComponent={() => <Header productDetails={productDetails} />}
       />
     </SafeAreaView>
   );
