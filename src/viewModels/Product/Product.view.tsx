@@ -7,6 +7,8 @@ import { CommentItem } from "./components/CommentItem";
 import { ListFooter } from "./components/ListFooter";
 import { EmptyList } from "./components/EmptyList";
 import { Loading } from "./components/Loading";
+import { ProductError } from "./components/Error";
+import { AddToCardFooter } from "./components/AddToCartFooter";
 
 export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
   isLoading,
@@ -23,22 +25,20 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
 }) => {
   console.log(comments, "comments");
   if (error) {
-    return <Text>Houve um erro ao carregar os detalhes do produto</Text>;
+    return <ProductError />;
   }
 
-  if (!productDetails) {
-    return null;
-  }
-  if (isLoading) {
+  if (isLoading || !productDetails) {
     return <Loading />;
   }
 
   return (
-    <SafeAreaView>
+    // o edges={["top"]} é para que o conteúdo não fique embaixo da barra de status do celular
+    <SafeAreaView edges={["top"]} className="flex-1 bg-background">
       <FlatList
         data={comments}
         renderItem={({ item }) => <CommentItem comment={item} />}
-        ListHeaderComponent={() => <Header productDetails={productDetails} />}
+        ListHeaderComponent={<Header productDetails={productDetails} />}
         className="px-6"
         onEndReached={handleEndReached}
         onRefresh={handleRefetch}
@@ -47,7 +47,9 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
           <ListFooter isLoadingMore={isFetchingNextPage} />
         )}
         ListEmptyComponent={<EmptyList isLoadingComments={isLoadingComments} />}
+        contentContainerClassName="pb-6"
       />
+      <AddToCardFooter product={productDetails} />
     </SafeAreaView>
   );
 };
