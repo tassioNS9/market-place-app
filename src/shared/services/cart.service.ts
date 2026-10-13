@@ -13,21 +13,32 @@ export const cartService = {
     );
 
     if (existingProduct) {
-      return productList.map((product) => {
+      const products = productList.map((product) => {
         if (product.id === newProduct.id) {
           return { ...product, quantity: product.quantity + 1 };
         } else {
           return product;
         }
       });
-    }
 
-    return [...productList, { ...newProduct, quantity: 1 }];
+      const total = cartService.calculateTotal(products);
+      return { products, total };
+    }
+    const products = [...productList, { ...newProduct, quantity: 1 }];
+    const total = cartService.calculateTotal(products);
+    return { products, total };
   },
 
   calculateTotal: (productList: CartProduct[]) => {
     return productList.reduce((acc, product) => {
       return acc + Number(product.price) * product.quantity;
     }, 0);
+  },
+
+  removeProductFromList: (productList: CartProduct[], productId: number) => {
+    const products = productList.filter((product) => product.id !== productId);
+    const total = cartService.calculateTotal(products);
+
+    return { products, total };
   },
 };
