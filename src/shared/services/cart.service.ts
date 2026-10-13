@@ -38,7 +38,32 @@ export const cartService = {
   removeProductFromList: (productList: CartProduct[], productId: number) => {
     const products = productList.filter((product) => product.id !== productId);
     const total = cartService.calculateTotal(products);
-
     return { products, total };
+  },
+  updateProductQuantity: ({
+    productId,
+    ProductList,
+    quantity,
+  }: {
+    productId: number;
+    ProductList: CartProduct[];
+    quantity: number;
+  }) => {
+    if (quantity <= 0) {
+      return cartService.removeProductFromList(ProductList, productId);
+    }
+
+    const products = ProductList.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity };
+      } else {
+        return product;
+      }
+    });
+    const total = cartService.calculateTotal(products);
+    return { products, total };
+  },
+  getItemCount: (productList: CartProduct[]) => {
+    return productList.reduce((acc, product) => acc + product.quantity, 0);
   },
 };
