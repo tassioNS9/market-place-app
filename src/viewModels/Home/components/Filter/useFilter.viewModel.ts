@@ -19,8 +19,6 @@ export const useFilterViewModel = () => {
     updateFilter({ key: "valueMax", value: value });
   };
 
-  console.log("appliedFilterState", appliedFilterState);
-
   const handleValueMinChange = (value: number) => {
     updateFilter({ key: "valueMin", value: value });
   };

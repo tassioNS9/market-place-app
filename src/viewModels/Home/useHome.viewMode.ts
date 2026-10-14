@@ -28,8 +28,6 @@ export const useHomeViewModel = () => {
     }
   };
 
-  console.log(appliedFilterState, "appliedFilters");
-
   const handleRefresh = async () => {
     await refetch();
   };
@@ -38,8 +36,6 @@ export const useHomeViewModel = () => {
     handleLoadMore();
   };
 
-  console.log("Error:", error);
-  console.log("Is Loading:", isLoading);
   return {
     handleLoadMore,
     handleRefresh,

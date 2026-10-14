@@ -12,8 +12,6 @@ interface HeaderParams {
 }
 
 export const Header: FC<HeaderParams> = ({ productDetails }) => {
-  console.log({ productDetails });
-
   return (
     <SafeAreaView className="px-4 py-2">
       <View className="pb-5 items-start">

@@ -5,7 +5,6 @@ import { colors } from "@/styles/colors";
 
 export const HomeHeader = () => {
   const { user, logout } = useUserStore();
-  console.log("User data in HomeHeader:", user);
 
   return (
     <View>
