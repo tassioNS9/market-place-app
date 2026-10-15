@@ -9,9 +9,13 @@ import { AppPriceText } from "@/shared/components/AppPriceText";
 
 interface HeaderParams {
   productDetails: GetProductDetailsInterface;
+  handleOpenReview: () => void;
 }
 
-export const Header: FC<HeaderParams> = ({ productDetails }) => {
+export const Header: FC<HeaderParams> = ({
+  productDetails,
+  handleOpenReview,
+}) => {
   return (
     <SafeAreaView className="px-4 py-2">
       <View className="pb-5 items-start">
@@ -97,7 +101,7 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
         <View className="flex-row items-center justify-between py-4 border-t border-gray-200">
           <Text className="text-base font-bold text-gray-800">Avaliações</Text>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleOpenReview}>
             <Text className="text-purple-base text-base font-medium">
               Avaliar
             </Text>
