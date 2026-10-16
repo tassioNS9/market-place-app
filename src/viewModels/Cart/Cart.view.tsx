@@ -3,6 +3,8 @@ import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ProductCartCard } from "./ProductCartCard";
 import { useCartViewModel } from "./useCart.viewModel";
+import { EmptyList } from "./EmptyList";
+import { CartHeader } from "./CartHeader";
 
 export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
   products,
@@ -14,6 +16,8 @@ export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
         data={products}
         renderItem={({ item }) => <ProductCartCard product={item} />}
         keyExtractor={({ id }) => `product-cart-id-${id}`}
+        ListEmptyComponent={<EmptyList />}
+        ListHeaderComponent={<CartHeader />}
       />
     </SafeAreaView>
   );
