@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ProductCartCard } from "./ProductCartCard";
+import { ProductCartCard } from "./components/ProductCartCard";
 import { useCartViewModel } from "./useCart.viewModel";
-import { EmptyList } from "./EmptyList";
-import { CartHeader } from "./CartHeader";
-import { CartFooter } from "./CartFooter";
+import { EmptyList } from "./components/EmptyList";
+import { CartHeader } from "./components/CartHeader";
+import { CartFooter } from "./components/CartFooter";
 
 export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
   products,
