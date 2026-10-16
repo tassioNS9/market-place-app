@@ -52,7 +52,7 @@ export const AppBottomSheet = () => {
       backgroundStyle={{
         backgroundColor: colors.background,
         borderTopLeftRadius: 32,
-        borderTopRightRadius: 31,
+        borderTopRightRadius: 32,
       }}
       backdropComponent={renderBackdrop}
       enablePanDownToClose={config?.enablePanDownToClose ?? true}
