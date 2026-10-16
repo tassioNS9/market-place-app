@@ -5,6 +5,7 @@ import { ProductCartCard } from "./ProductCartCard";
 import { useCartViewModel } from "./useCart.viewModel";
 import { EmptyList } from "./EmptyList";
 import { CartHeader } from "./CartHeader";
+import { CartFooter } from "./CartFooter";
 
 export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
   products,
@@ -18,6 +19,7 @@ export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
         keyExtractor={({ id }) => `product-cart-id-${id}`}
         ListEmptyComponent={<EmptyList />}
         ListHeaderComponent={<CartHeader />}
+        ListFooterComponent={products.length > 0 ? <CartFooter /> : null}
       />
     </SafeAreaView>
   );
