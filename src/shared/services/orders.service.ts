@@ -1,4 +1,5 @@
 import { marketPlaceApiClient } from "../api/market-place";
+import { GetOrdersResponse } from "../interfaces/http/get-orders";
 import {
   SubmitOrderRequestParamsInterface,
   SubmitOrderResponse,
@@ -10,5 +11,10 @@ export const submitOrder = async (order: SubmitOrderRequestParamsInterface) => {
     order,
   );
 
+  return data;
+};
+
+export const getOrders = async () => {
+  const { data } = await marketPlaceApiClient.get<GetOrdersResponse>("/orders");
   return data;
 };
