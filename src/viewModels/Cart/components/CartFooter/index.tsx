@@ -72,6 +72,7 @@ export const CartFooter: FC<CartFooterParams> = ({
             data={creditCards}
             renderItem={({ item }) => <CreditCardItem creditCard={item} />}
             keyExtractor={(item) => `credit-card-id-${item.id}`}
+            className="gap-2"
           />
         )}
 
