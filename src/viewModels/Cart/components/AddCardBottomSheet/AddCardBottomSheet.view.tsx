@@ -9,7 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export const AddCardBottomSheetView: FC<
   ReturnType<typeof useAddCardBottomSheetViewModel>
-> = () => {
+> = ({ handleCreateCreditCard }) => {
   return (
     <SafeAreaView>
       <ScrollView className="flex-1">
