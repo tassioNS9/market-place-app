@@ -1,15 +1,34 @@
 import { useState } from "react";
 import { CreditCard } from "@/shared/interfaces/credit-card";
 import { useCartStore } from "@/shared/store/cart-store";
+import { useSubmitOrderMutation } from "@/shared/queries/orders/use-submit-order.mutation";
+import { router } from "expo-router";
 
 export const useCartFooterViewModel = () => {
   const [selectedCreditCard, setSelectedCreditCard] =
     useState<null | CreditCard>(null);
 
-  const { total } = useCartStore();
+  const { products, total, clearCart } = useCartStore();
+
+  const createOrderMutation = useSubmitOrderMutation();
+
+  const submitOrderMutation = async () => {
+    if (!selectedCreditCard) return;
+
+    await createOrderMutation.mutateAsync({
+      creditCardId: selectedCreditCard.id,
+      items: products.map(({ id, quantity }) => ({ productId: id, quantity })),
+    });
+
+    clearCart();
+    router.push("/orders");
+  };
+
   return {
     total,
     selectedCreditCard,
     setSelectedCreditCard,
+    submitOrderMutation,
+    isLoadingOrder: createOrderMutation.isPending,
   };
 };
