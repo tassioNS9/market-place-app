@@ -9,7 +9,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export const AddCardBottomSheetView: FC<
   ReturnType<typeof useAddCardBottomSheetViewModel>
-> = ({ handleCreateCreditCard, control }) => {
+> = ({
+  handleCreateCreditCard,
+  control,
+  expirationDateMask,
+  cardNumberMask,
+}) => {
   return (
     <SafeAreaView>
       <ScrollView className="flex-1">
@@ -42,6 +47,8 @@ export const AddCardBottomSheetView: FC<
               label="NÚMERO"
               placeholder="Número do cartão"
               keyboardType="numeric"
+              maxLength={19}
+              mask={cardNumberMask}
             />
             <View className="flex-row gap-4">
               <View className="flex-1">
@@ -53,6 +60,7 @@ export const AddCardBottomSheetView: FC<
                   placeholder="MM/AA"
                   keyboardType="numeric"
                   maxLength={5}
+                  mask={expirationDateMask}
                 />
               </View>
               <View className="flex-1">
@@ -63,6 +71,7 @@ export const AddCardBottomSheetView: FC<
                   label="CVV"
                   placeholder="000"
                   keyboardType="numeric"
+                  maxLength={3}
                 />
               </View>
             </View>
