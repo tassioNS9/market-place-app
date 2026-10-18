@@ -1,6 +1,15 @@
 import { useCartStore } from "@/shared/store/cart-store";
+import { createElement } from "react";
+import { AddCardBottomSheet } from "./components/AddCardBottomSheet";
+import { useBottomSheetStore } from "@/shared/store/bottomsheet-store";
 
 export const useCartViewModel = () => {
   const { products } = useCartStore();
-  return { products };
+
+  const { open: openBottomSheet } = useBottomSheetStore();
+
+  const openCartBottomSheet = () => {
+    openBottomSheet({ content: createElement(AddCardBottomSheet) });
+  };
+  return { products, openCartBottomSheet };
 };

@@ -4,8 +4,13 @@ import { AppButton } from "@/shared/components/AppButton";
 import { AppPriceText } from "@/shared/components/AppPriceText";
 import { colors } from "@/styles/colors";
 import { useCartStore } from "@/shared/store/cart-store";
+import { FC } from "react";
 
-export const CartFooter = () => {
+interface CartFooterParams {
+  openCartBottomSheet: () => void;
+}
+
+export const CartFooter: FC<CartFooterParams> = ({ openCartBottomSheet }) => {
   const { total } = useCartStore();
   return (
     <View className="bg-white p-4 rounded-lg mt-6">
@@ -26,7 +31,10 @@ export const CartFooter = () => {
             Cartões de crédito
           </Text>
 
-          <TouchableOpacity className="flex-row items-center">
+          <TouchableOpacity
+            onPress={openCartBottomSheet}
+            className="flex-row items-center"
+          >
             <Ionicons
               name="card-outline"
               size={20}
