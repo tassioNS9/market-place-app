@@ -34,7 +34,6 @@ export const AppInput: FC<AppInputProps> = ({
   onChangeText,
   error,
   isDisabled,
-
   ...textInputProps
 }) => {
   const {
@@ -78,13 +77,14 @@ export const AppInput: FC<AppInputProps> = ({
           onBlur={handleBlur}
           onFocus={handleFocus}
           onChangeText={handleTextChange}
+          value={value}
           className={styles.input()}
           secureTextEntry={showPassword}
           {...textInputProps}
         />
 
         {secureTextEntry && (
-          <TouchableOpacity onPress={handlePasswordToggle}>
+          <TouchableOpacity activeOpacity={0.7} onPress={handlePasswordToggle}>
             <Ionicons
               color={getIconColor()}
               size={22}
