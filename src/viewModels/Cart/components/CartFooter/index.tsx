@@ -12,6 +12,7 @@ import { colors } from "@/styles/colors";
 import { useCartStore } from "@/shared/store/cart-store";
 import { FC } from "react";
 import { CreditCard } from "@/shared/interfaces/credit-card";
+import { CreditCardItem } from "../CreditCardItem";
 
 interface CartFooterParams {
   openCartBottomSheet: () => void;
@@ -69,7 +70,7 @@ export const CartFooter: FC<CartFooterParams> = ({
         ) : (
           <FlatList
             data={creditCards}
-            renderItem={({ item }) => <Text>{item.titularName}</Text>}
+            renderItem={({ item }) => <CreditCardItem creditCard={item} />}
             keyExtractor={(item) => `credit-card-id-${item.id}`}
           />
         )}
