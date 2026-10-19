@@ -5,6 +5,10 @@ import {
   SelectionModalProps,
 } from "../components/Modals/SelectionModal";
 import { useModalStore } from "../store/modal-store";
+import {
+  SuccessModal,
+  SuccessModalParams,
+} from "../components/Modals/SuccessModal";
 
 export type SelectionVariant = "primary" | "secondary" | "danger";
 
@@ -38,5 +42,19 @@ export const useAppModal = () => {
       } as SelectionModalProps),
     );
   };
-  return { showSelection };
+
+  const showSuccess = (config: SuccessModalParams) => {
+    open(
+      createElement(SuccessModal, {
+        ...config,
+        onButtonPress: () => {
+          if (config.onButtonPress) {
+            config.onButtonPress();
+          }
+          close();
+        },
+      }),
+    );
+  };
+  return { showSelection, showSuccess };
 };
