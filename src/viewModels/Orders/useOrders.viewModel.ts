@@ -1,11 +1,8 @@
 import { useGetOrdersQuery } from "@/shared/queries/orders/use-get-orders.query";
 
 export const useOrdersViewModel = () => {
-  const { data: ordersData, isLoading, error } = useGetOrdersQuery();
+  const { data: ordersResponse, isLoading } = useGetOrdersQuery();
+  const orders = ordersResponse?.orders ?? [];
 
-  return {
-    ordersData,
-    isLoading,
-    error,
-  };
+  return { orders, isLoading };
 };
