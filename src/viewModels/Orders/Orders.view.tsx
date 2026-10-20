@@ -6,11 +6,20 @@ import { OrderItem } from "./components/OrderItem";
 import { colors } from "@/styles/colors";
 import { EmptyList } from "./components/EmptyList";
 import { ListHeader } from "./components/ListHeader";
+import { OrdersError } from "./components/OrdersError";
+import { OrdersLoading } from "./components/OrdersLoading";
 
 export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
   orders: ordersData,
+  error,
   isLoading,
 }) => {
+  if (isLoading) {
+    return <OrdersLoading />;
+  }
+  if (error) {
+    return <OrdersError />;
+  }
   return (
     <SafeAreaView edges={["top"]} className="flex-1 ">
       {isLoading ? (
