@@ -5,6 +5,7 @@ import { FC } from "react";
 import { OrderItem } from "./components/OrderItem";
 import { colors } from "@/styles/colors";
 import { EmptyList } from "./components/EmptyList";
+import { ListHeader } from "./components/ListHeader";
 
 export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
   orders: ordersData,
@@ -18,6 +19,7 @@ export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
         </View>
       ) : (
         <FlatList
+          ListHeaderComponent={<ListHeader />}
           contentContainerClassName="px-[16px] pb-[120px]"
           data={ordersData}
           renderItem={({ item: order }) => <OrderItem order={order} />}
