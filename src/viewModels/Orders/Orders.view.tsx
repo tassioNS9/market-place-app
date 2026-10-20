@@ -4,6 +4,7 @@ import { useOrdersViewModel } from "./useOrders.viewModel";
 import { FC } from "react";
 import { OrderItem } from "./components/OrderItem";
 import { colors } from "@/styles/colors";
+import { EmptyList } from "./components/EmptyList";
 
 export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
   orders: ordersData,
@@ -21,6 +22,7 @@ export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
           data={ordersData}
           renderItem={({ item: order }) => <OrderItem order={order} />}
           keyExtractor={({ id }) => `order-list-item-${id}`}
+          ListEmptyComponent={<EmptyList />}
         />
       )}
     </SafeAreaView>
