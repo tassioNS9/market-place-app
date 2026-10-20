@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Image, Text, View } from "react-native";
 import { OrderInterface } from "@/shared/interfaces/order";
+import { format } from "date-fns";
+import { AppPriceText } from "@/shared/components/AppPriceText";
 
 interface OrderItemParams {
   order: OrderInterface;
@@ -24,13 +26,23 @@ export const OrderItem: FC<OrderItemParams> = ({ order }) => {
             {order.productName}
           </Text>
 
-          <Text>{order.createdAt.toString()}</Text>
+          <Text className="text-sm text-gray-600">
+            {format(order.createdAt, "dd/MM/yyyy")}
+          </Text>
         </View>
-
-        <Text>
-          {order.quantity} - {order.totalPrice}
+        <View className="flex-row items-center mb-1">
+          <Text className="text-sm text-gray-600 mr-1">
+            {order.quantity} {order.quantity > 1 ? "Unidades" : "Unidade"} •
+          </Text>
+          <AppPriceText
+            value={order.totalPrice}
+            classNameCurrency="text-sm text-gray-600"
+            classNameValue="text-sm text-gray-600"
+          />
+        </View>
+        <Text className="text-sm text-gray-600">
+          Cartão final {order.creditCard.maskedNumber.slice(-4)}
         </Text>
-        <Text>{order.creditCard.maskedNumber}</Text>
       </View>
     </View>
   );
