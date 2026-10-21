@@ -20,6 +20,10 @@ export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
 }) => {
   return (
     <SafeAreaView edges={["top"]} className="flex-1">
+      <RenderHeader
+        searchInputText={searchInputText}
+        setSearchInputText={setSearchInputText}
+      />
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductCard product={item} />}
@@ -32,12 +36,6 @@ export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({
         )}
         onEndReached={handleEndReached}
         columnWrapperStyle={{ justifyContent: "space-between" }}
-        ListHeaderComponent={
-          <RenderHeader
-            searchInputText={searchInputText}
-            setSearchInputText={setSearchInputText}
-          />
-        }
         contentContainerClassName="px-4 pb-[120px]"
         refreshControl={
           <RefreshControl
