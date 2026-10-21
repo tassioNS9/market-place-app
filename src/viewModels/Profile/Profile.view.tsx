@@ -5,15 +5,18 @@ import { AppButton } from "@/shared/components/AppButton";
 import { AppInputController } from "@/shared/components/AppInputController";
 import { KeyboardContainer } from "@/shared/components/KeyboardContainer";
 import { useProfileViewModel } from "./useProfile.viewModel";
+import { Header } from "./components/Header";
 
 export const ProfileView: FC<ReturnType<typeof useProfileViewModel>> = ({
   control,
   onSubmit,
   avatarUri,
+  isSubmitting,
 }) => {
   return (
     <KeyboardContainer>
       <ScrollView className="flex-1 px-[40px]">
+        <Header />
         <TouchableOpacity className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8">
           {avatarUri ? (
             <Image
@@ -69,7 +72,9 @@ export const ProfileView: FC<ReturnType<typeof useProfileViewModel>> = ({
           secureTextEntry
         />
 
-        <AppButton className="mt-6">Atualizar cadastro</AppButton>
+        <AppButton onPress={onSubmit} isLoading={isSubmitting} className="mt-6">
+          Atualizar cadastro
+        </AppButton>
       </ScrollView>
     </KeyboardContainer>
   );
