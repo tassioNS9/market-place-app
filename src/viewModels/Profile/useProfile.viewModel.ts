@@ -4,12 +4,19 @@ import { useForm } from "react-hook-form";
 import { useUserStore } from "../../shared/store/user-store";
 import { ProfileFormData, profileScheme } from "./profile.scheme";
 import { useUpdateProfileMutation } from "../../shared/queries/profile/use-update-profile.mutation";
+import { useAppModal } from "@/shared/hooks/useAppModal";
+import { useCartStore } from "@/shared/store/cart-store";
+import { useModalStore } from "@/shared/store/modal-store";
 export const useProfileViewModel = () => {
-  const { user } = useUserStore();
+  const { user, logout } = useUserStore();
   const [avatarUri, setAvatarUri] = useState<string | null>(
     user?.avatarUrl ?? null,
   );
   const updateProfileMutation = useUpdateProfileMutation();
+
+  const { showSelection } = useAppModal();
+  const { close } = useModalStore();
+  const { clearCart } = useCartStore();
   const {
     control,
     handleSubmit,
@@ -26,10 +33,10 @@ export const useProfileViewModel = () => {
   });
 
   const validatePasswords = (userData: ProfileFormData) => {
-    if (!userData.password) return false;
+    if (!userData.password) return true;
     if (
-      userData.password === userData.newPassword &&
-      userData.password?.length > 0
+      userData?.password === userData?.newPassword &&
+      userData?.password?.length > 0
     ) {
       return false;
     }
@@ -43,5 +50,26 @@ export const useProfileViewModel = () => {
     await updateProfileMutation.mutateAsync(userData);
   });
 
-  return { control, onSubmit, avatarUri, isSubmitting };
+  const handleLogout = () =>
+    showSelection({
+      title: "Sair",
+      message: "Tem certeza que deseja sair da sua conta?",
+      options: [
+        {
+          text: "Continuar logado",
+          variant: "primary",
+          onPress: close,
+        },
+        {
+          text: "Sair",
+          variant: "danger",
+          onPress: () => {
+            clearCart();
+            logout();
+          },
+        },
+      ],
+    });
+
+  return { control, onSubmit, avatarUri, isSubmitting, handleLogout };
 };
