@@ -13,12 +13,16 @@ export const ProfileView: FC<ReturnType<typeof useProfileViewModel>> = ({
   avatarUri,
   isSubmitting,
   handleLogout,
+  handleSelectImage,
 }) => {
   return (
     <KeyboardContainer>
       <ScrollView className="flex-1 px-[40px]">
         <Header onLogout={handleLogout} />
-        <TouchableOpacity className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8">
+        <TouchableOpacity
+          onPress={handleSelectImage}
+          className="w-[120px] h-[120px] rounded-xl items-center justify-center bg-shape self-center mb-8"
+        >
           {avatarUri ? (
             <Image
               source={{ uri: avatarUri }}
