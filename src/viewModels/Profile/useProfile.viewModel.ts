@@ -66,6 +66,7 @@ export const useProfileViewModel = () => {
           onPress: () => {
             clearCart();
             logout();
+            close();
           },
         },
       ],
