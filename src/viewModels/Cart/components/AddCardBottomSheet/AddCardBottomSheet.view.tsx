@@ -6,6 +6,7 @@ import { AppInputController } from "@/shared/components/AppInputController";
 import { colors } from "@/styles/colors";
 import { useAddCardBottomSheetViewModel } from "./useAddCardBottomSheet.viewModel";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { CreditCard } from "./components/CreditCard";
 
 export const AddCardBottomSheetView: FC<
   ReturnType<typeof useAddCardBottomSheetViewModel>
@@ -31,6 +32,8 @@ export const AddCardBottomSheetView: FC<
               />
             </TouchableOpacity>
           </View>
+
+          <CreditCard />
 
           <View className="mt-6 gap-4">
             <AppInputController
