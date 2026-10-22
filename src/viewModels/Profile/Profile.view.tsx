@@ -66,10 +66,10 @@ export const ProfileView: FC<ReturnType<typeof useProfileViewModel>> = ({
 
         <AppInputController
           leftIcon="lock-closed-outline"
-          label="CONFIRMAR SENHA"
+          label="NOVA SENHA"
           control={control}
-          name="confirmPassword"
-          placeholder="Confirme sua senha"
+          name="newPassword"
+          placeholder="Nova Senha"
           secureTextEntry
         />
 
