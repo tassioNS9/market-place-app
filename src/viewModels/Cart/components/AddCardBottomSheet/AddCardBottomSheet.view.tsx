@@ -15,6 +15,10 @@ export const AddCardBottomSheetView: FC<
   control,
   expirationDateMask,
   cardNumberMask,
+  isFlipped,
+  handleFieldFocus,
+  handleFieldBlur,
+  focusedField,
 }) => {
   return (
     <SafeAreaView>
@@ -33,7 +37,7 @@ export const AddCardBottomSheetView: FC<
             </TouchableOpacity>
           </View>
 
-          <CreditCard />
+          <CreditCard isFlipped={isFlipped} focusedField={focusedField} />
 
           <View className="mt-6 gap-4">
             <AppInputController
@@ -42,6 +46,8 @@ export const AddCardBottomSheetView: FC<
               leftIcon="person-outline"
               label="NOME DO TITULAR"
               placeholder="Nome completo"
+              onFocus={() => handleFieldFocus("name")}
+              onBlur={handleFieldBlur}
             />
             <AppInputController
               control={control}
@@ -52,6 +58,8 @@ export const AddCardBottomSheetView: FC<
               keyboardType="numeric"
               maxLength={19}
               mask={cardNumberMask}
+              onFocus={() => handleFieldFocus("number")}
+              onBlur={handleFieldBlur}
             />
             <View className="flex-row gap-4">
               <View className="flex-1">
@@ -64,6 +72,8 @@ export const AddCardBottomSheetView: FC<
                   keyboardType="numeric"
                   maxLength={5}
                   mask={expirationDateMask}
+                  onFocus={() => handleFieldFocus("expiry")}
+                  onBlur={handleFieldBlur}
                 />
               </View>
               <View className="flex-1">
@@ -75,6 +85,8 @@ export const AddCardBottomSheetView: FC<
                   placeholder="000"
                   keyboardType="numeric"
                   maxLength={3}
+                  onFocus={() => handleFieldFocus("cvv")}
+                  onBlur={handleFieldBlur}
                 />
               </View>
             </View>
